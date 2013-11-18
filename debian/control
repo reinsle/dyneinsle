@@ -1,15 +1,14 @@
 Source: dyneinsle
-Section: unknown
+Section: net
 Priority: extra
 Maintainer: Robert Einsle <robert@einsle.de>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.3
-Homepage: <insert the upstream URL, if relevant>
-#Vcs-Git: git://git.debian.org/collab-maint/dyneinsle.git
-#Vcs-Browser: http://git.debian.org/?p=collab-maint/dyneinsle.git;a=summary
+Homepage: https://github.com/reinsle/dyneinsle
+Vcs-Git: git://github.com/reinsle/dyneinsle.git
 
 Package: dyneinsle
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Architecture: all
+Depends: curl, dynutils, bind9utils
+Description: dyndns client for einsles dyndns
+ dyneinsle is the client to use einsles dyndns service.

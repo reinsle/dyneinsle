@@ -1,4 +1,12 @@
-dyneinsle (0.2) stable; urgency=low
+dyneinsle (0.3) unstable; urgency=low
+
+  * fix crontab entries
+  * add crontab entrie for reboot
+  * fix path to ifconfig
+
+ -- Robert Einsle <robert@einsle.de>  Mon, 18 Nov 2013 11:32:15 +0100
+
+dyneinsle (0.2) unstable; urgency=low
 
   * push to stable version of package
 

@@ -1,3 +1,9 @@
+dyneinsle (0.2) stable; urgency=low
+
+  * push to stable version of package
+
+ -- Robert Einsle <robert@einsle.de>  Mon, 18 Nov 2013 10:52:16 +0100
+
 dyneinsle (0.1) unstable; urgency=low
 
   * Initial Release.

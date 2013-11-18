@@ -27,13 +27,19 @@ function get_external_ip() {
 function update_dns() {
   NAME=$1
   IP=$2
-  /usr/bin/nsupdate -k $KEY << EOF
+  EXIST_IP=`host $1 | grep -v IPv6 | cut -d' ' -f4`
+  if [ "$IP" != "$EXIST_IP" ]
+  then
+    /usr/bin/nsupdate -k $KEY << EOF
 server ns-dyn.einsle.de
 update delete $NAME A
 update add $NAME 60 A $IP
 send
 EOF
-  logger -t dyneinsle "DNS-Record $NAME using ip $IP updated"
+    logger -t dyneinsle "DNS-Record: $NAME: $IP changed, updating dns-record"
+  else
+    logger -t dyneinsle "DNS-Record: $NAME: $IP not changed, not updating"
+  fi
 }
 
 update_dns $ZONE `get_external_ip`

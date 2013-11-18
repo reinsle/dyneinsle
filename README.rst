@@ -6,9 +6,7 @@ DynEinsle is a dynamic dns client using bind as dyndns server.
 Download
 ========
 
-Here you can download the actual version of dyneinsle:
-
-.. _dyneinsle: http://debian.einsle.de/debian/pool/main/d/dyneinsle/
+Here you can download the actual version of dyneinsle: http://debian.einsle.de/debian/pool/main/d/dyneinsle/
 
 Installation
 ============

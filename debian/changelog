@@ -1,3 +1,10 @@
+dyneinsle (0.4) unstable; urgency=low
+
+  * fix: check if ip-address is changed, and only on changed ip-address an
+    update is occured
+
+ -- Robert Einsle <robert@einsle.de>  Mon, 18 Nov 2013 17:59:54 +0100
+
 dyneinsle (0.3) unstable; urgency=low
 
   * fix crontab entries

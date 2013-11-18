@@ -8,7 +8,7 @@ Download
 
 Here you can download the actual version of dyneinsle:
 
-.. _dyneinsle: http://debian.einsle.de/debian/pool/main/d/dyneinsle/dyneinsle_0.3_all.deb
+.. _dyneinsle: http://debian.einsle.de/debian/pool/main/d/dyneinsle/
 
 Installation
 ============

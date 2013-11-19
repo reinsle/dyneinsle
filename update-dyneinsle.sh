@@ -5,7 +5,14 @@
 # (c) Robert Einsle <robert@einsle.de>
 #
 
+VERBOSE=0
+
 source /etc/dyneinsle/dyneinsle.conf
+
+if [ "$ENABLED" != "1" ]
+then
+    exit 0
+fi
 
 # Auslesen der Interfaces des Hosts
 function get_interfaces() {
@@ -20,7 +27,7 @@ function get_ip_of() {
 
 # Bestimmen der externen IP-Adresse
 function get_external_ip() {
-  echo `curl --silent http://showip.spamt.net`
+  echo `curl -4 --silent http://showip.spamt.net`
 }
 
 # Update des DNS-Servers
@@ -28,10 +35,13 @@ function update_dns() {
   NAME=$1
   IP=$2
   EXIST_IP=`host $1 | grep -v IPv6 | cut -d' ' -f4`
+  if [ $VERBOSE -eq 1 ]; then
+    printf "Upgrading %s using new IP: %s\n" "$NAME" "$IP"
+  fi
   if [ "$IP" != "$EXIST_IP" ]
   then
     /usr/bin/nsupdate -k $KEY << EOF
-server ns-dyn.einsle.de
+server $NS_SERVER
 update delete $NAME A
 update add $NAME 60 A $IP
 send
@@ -41,6 +51,32 @@ EOF
     logger -t dyneinsle "DNS-Record: $NAME: $IP not changed, not updating"
   fi
 }
+
+function usage() {
+cat << EOF
+usage: $0 options
+
+This script updates dynamic dns service using bind.
+
+OPTIONS:
+    -h    Show this help
+    -v    Verbose
+
+EOF
+}
+
+while getopts "hv" OPTION
+do
+    case $OPTION in
+        h)
+            usage
+            exit 1
+            ;;
+        v)
+            VERBOSE=1
+            ;;
+    esac
+done
 
 update_dns $ZONE `get_external_ip`
 for IF in `get_interfaces`; do

@@ -14,6 +14,18 @@ then
     exit 0
 fi
 
+if [ -z "$KEY" ]
+then
+    echo "Config-option KEY must be set!"
+    exit 2
+fi
+
+if [ ! -r "$KEY" ]
+then
+    echo "Config-option KEY must be a readable file!"
+    exit 2
+fi
+
 # Auslesen der Interfaces des Hosts
 function get_interfaces() {
   echo `cat /proc/net/dev | grep : | grep -v lo | cut -d: -f1 | tr -d ' '`

@@ -1,3 +1,9 @@
+dyneinsle (0.8) unstable; urgency=low
+
+  * fix: add dependencie to dnsutils
+
+ -- Robert Einsle <robert@einsle.de>  Wed, 20 Nov 2013 07:45:07 +0100
+
 dyneinsle (0.7) unstable; urgency=low
 
   * fix: check config-option KEY 

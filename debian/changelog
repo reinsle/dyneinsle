@@ -1,3 +1,11 @@
+dyneinsle (0.9) unstable; urgency=low
+
+  * add: config-option to export interface adresses
+  * doc: documentation of configfile appended
+  * fix: move dynamic dns zone from dyn.einsle.de to dyn-home.de
+
+ -- Robert Einsle <robert@einsle.de>  Sun, 24 Nov 2013 14:55:21 +0100
+
 dyneinsle (0.8) unstable; urgency=low
 
   * fix: add dependencie to dnsutils

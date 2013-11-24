@@ -7,7 +7,11 @@
 
 VERBOSE=0
 
+# read the config-file
 source /etc/dyneinsle/dyneinsle.conf
+
+# read the config-file for local changes
+source /etc/dyneinsle/dyneinsle.conf.local
 
 if [ "$ENABLED" != "1" ]
 then

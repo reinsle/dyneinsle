@@ -13,6 +13,7 @@ source /etc/dyneinsle/dyneinsle.conf
 # read the config-file for local changes
 source /etc/dyneinsle/dyneinsle.conf.local
 
+
 if [ "$ENABLED" != "1" ]
 then
     exit 0
@@ -95,9 +96,12 @@ do
 done
 
 update_dns $ZONE `get_external_ip`
-for IF in `get_interfaces`; do
-    IF_IP=`get_ip_of $IF`
-    if [ -n "$IF_IP" ]; then
-        update_dns $IF.$ZONE $IF_IP
-    fi
-done
+
+if [ $EXPORT_IF -eq 1 ]; then
+    for IF in `get_interfaces`; do
+        IF_IP=`get_ip_of $IF`
+        if [ -n "$IF_IP" ]; then
+            update_dns $IF.$ZONE $IF_IP
+        fi
+    done
+fi

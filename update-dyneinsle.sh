@@ -39,7 +39,7 @@ function get_interfaces() {
 # Auslesen einer IPv4-Adresse des uebergebenen Interfaces
 function get_ip_of() {
   IF=$1
-  echo `/sbin/ifconfig $IF | grep inet | grep -v inet6 | cut -d: -f2 | cut -d' ' -f1`
+  echo `ip -4 a s $IF | grep inet | sed 's/^ *//g' | cut -d '/' -f 1 | cut -d 't' -f 2 | tr -d ' '`
 }
 
 # Bestimmen der externen IP-Adresse

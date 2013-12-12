@@ -1,3 +1,9 @@
+dyneinsle (1.1) stable; urgency=low
+
+  * fix: replace ifconfig command using ip
+
+ -- Robert Einsle <robert@einsle.de>  Thu, 12 Dec 2013 22:09:35 +0100
+
 dyneinsle (1.0) stable; urgency=low
 
   * make release of dyneinsle dynamic dns client

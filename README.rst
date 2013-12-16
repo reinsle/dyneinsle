@@ -15,7 +15,26 @@ The installation on debian is as simple as:
 
 .. code:: bash
 
-    dpkg -i dyneinsle_1.0_all.deb
+    dpkg -i dyneinsle_1.2_all.deb
+
+Configuration
+=============
+
+Client
+------
+
+- Install dyneinsle as seen on the Topic above
+- create a key like described on Documentation, and configre it on server side.
+- copy /etc/dyneinsle.conf to /etc/dyneinsle.conf.local
+- edit /etc/dyneinsle.conf.local, don't forget to enable the service
+- done, Service will run as Cron-Job
+
+Server
+------
+
+- Add the key created on client to servers zone-file (As described on Documentation)
+- Add a configline to bind (/etc/bind/named.conf.local) (As described on Documentation)
+- Restart Bind
 
 Documentation
 =============
@@ -27,9 +46,9 @@ To create a new dynamic-dns-key you can use dnssec-keygen out of debians bind9ut
 
 .. code:: bash
 
-    dnssec-keygen -a RSASHA1 -b 4096 -T KEY -r /dev/urandom -n host xxx.dyn.einsle.de  
+    dnssec-keygen -a RSASHA1 -b 4096 -T KEY -r /dev/urandom -n host xxx.dyn-home.de  
 
-This creates 2 new Files, 'Kxxx.dyn.einsle.de.*.key' and 'Kxxx.dyn.einsle.de.*.private'. The .key file should be integrated into master dns zonefile, the .private is used on the client.
+This creates 2 new Files, 'Kxxx.dyn-home.de.*.key' and 'Kxxx.dyn-home.de.*.private'. The .key file should be integrated into master dns zonefile, the .private is used on the client.
 
 Integrate Bind (Server)
 -----------------------
@@ -45,7 +64,7 @@ First you should extend the zone-config:
     update-policy {
         ...
         grant|deny identity matchtype name [rr];
-        grant xxx.dyn.einsle.de subdomain xxx.dyn.einsle.de. A;
+        grant xxx.dyn-home.de subdomain xxx.dyn-home.de. A;
         ...
     };
 
@@ -75,14 +94,14 @@ To update the zoneinfo on Server you can use the scritp above to download or you
     # (c) Robert Einsle <robert@einsle.de>
     #
     
-    KEY="/etc/dyn/Kxxx.dyn.einsle.de.+003+31559.private"
-    NAME=xxx.dyn.einsle.de.
+    KEY="/etc/dyn/Kxxx.dyn-home.de.+003+31559.private"
+    NAME=xxx.dyn-home.de.
     
-    IP=`curl --silent http://ns-dyn.einsle.de/ip.php`
+    IP=`curl --silent http://ns-dyn-home.de/ip.php`
     
     #echo "Updating $NAME mit ip: $IP"
     /usr/bin/nsupdate -k $KEY << EOF
-    server ns-dyn.einsle.de
+    server ns-dyn.dyn-home.de
     update delete $NAME A
     update add $NAME 60 A $IP
     send
@@ -91,7 +110,7 @@ To update the zoneinfo on Server you can use the scritp above to download or you
 Cron
 ----
 
-To letz automatically update cron the service you can use this script:
+To let automatically update cron the service you can use this script:
 
 .. code:: bash
 

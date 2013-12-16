@@ -1,3 +1,9 @@
+dyneinsle (1.2) stable; urgency=low
+
+  * fix: bug in doku, used old dns-domains dyn.einsle.de
+
+ -- Robert Einsle <robert@einsle.de>  Mon, 16 Dec 2013 10:18:30 +0100
+
 dyneinsle (1.1) stable; urgency=low
 
   * fix: replace ifconfig command using ip

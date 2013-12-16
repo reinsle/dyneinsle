@@ -15,7 +15,7 @@ The installation on debian is as simple as:
 
 .. code:: bash
 
-    dpkg -i dyneinsle_1.2_all.deb
+    dpkg -i dyneinsle_*_all.deb
 
 Configuration
 =============

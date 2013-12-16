@@ -1,3 +1,9 @@
+dyneinsle (1.3) UNRELEASED; urgency=low
+
+  * fix: add alternative method to fetch public ip
+
+ -- Robert Einsle <robert@einsle.de>  Mon, 16 Dec 2013 14:50:13 +0100
+
 dyneinsle (1.2) stable; urgency=low
 
   * fix: bug in doku, used old dns-domains dyn.einsle.de

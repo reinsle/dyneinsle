@@ -44,6 +44,8 @@ function get_ip_of() {
 
 # Bestimmen der externen IP-Adresse
 function get_external_ip() {
+  # Alternativ:
+  # host -4 myip.opendns.com resolver1.opendns.com | grep address | cut -d ' ' -f 4 | tr -d ' '
   echo `curl -4 --silent http://showip.spamt.net`
 }
 

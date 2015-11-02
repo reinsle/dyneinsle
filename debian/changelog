@@ -1,3 +1,10 @@
+dyneinsle (2.0) UNRELEASED; urgency=medium
+
+  * fix: documentation in conf file
+  * add: list of ipv6 interfaces to export to dynamic dns
+
+ -- root <root@ke.einsle.de>  Mon, 02 Nov 2015 15:43:11 +0000
+
 dyneinsle (1.3) stable; urgency=low
 
   * fix: add alternative method to fetch public ip

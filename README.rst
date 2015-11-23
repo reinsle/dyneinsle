@@ -1,17 +1,17 @@
 DynEinsle
 =========
 
-DynEinsle is a dynamic dns client using bind as dyndns server.
+DynEinsle is a dynamic DNS client using bind as dyndns server.
 
 Download
 ========
 
-Here you can download the actual version of dyneinsle: http://debian.einsle.de/debian/pool/main/d/dyneinsle/
+Here you can download the latest version of dyneinsle: http://debian.einsle.de/debian/pool/main/d/dyneinsle/
 
 Installation
 ============
 
-The installation on debian is as simple as:
+The installation on debian is simple as:
 
 .. code:: bash
 
@@ -23,17 +23,17 @@ Configuration
 Client
 ------
 
-- Install dyneinsle as seen on the Topic above
-- create a key like described on Documentation, and configre it on server side.
-- copy /etc/dyneinsle.conf to /etc/dyneinsle.conf.local
-- edit /etc/dyneinsle.conf.local, don't forget to enable the service
-- done, Service will run as Cron-Job
+- Install dyneinsle as seen in the Topic above
+- Create a key like described down in the Documentation, and configre it on the server.
+- Copy /etc/dyneinsle.conf to /etc/dyneinsle.conf.local
+- Edit /etc/dyneinsle.conf.local, don't forget to enable the service
+- Done, the service will run as Cron-Job
 
 Server
 ------
 
-- Add the key created on client to servers zone-file (As described on Documentation)
-- Add a configline to bind (/etc/bind/named.conf.local) (As described on Documentation)
+- Add the key created on the client to your servers zone-file (As described in the Documentation)
+- Add a config line to bind (/etc/bind/named.conf.local) (As described in the Documentation)
 - Restart Bind
 
 Documentation
@@ -48,7 +48,7 @@ To create a new dynamic-dns-key you can use dnssec-keygen out of debians bind9ut
 
     dnssec-keygen -a RSASHA1 -b 4096 -T KEY -r /dev/urandom -n host xxx.dyn-home.de  
 
-This creates 2 new Files, 'Kxxx.dyn-home.de.*.key' and 'Kxxx.dyn-home.de.*.private'. The .key file should be integrated into master dns zonefile, the .private is used on the client.
+This creates 2 new Files, 'Kxxx.dyn-home.de.*.key' and 'Kxxx.dyn-home.de.*.private'. The .key file should be integrated into master dns zonefile, the .private file is used on the client.
 
 Integrate Bind (Server)
 -----------------------
@@ -68,7 +68,7 @@ First you should extend the zone-config:
         ...
     };
 
-Documentation about it can be found at: http://www.zytrax.com/books/dns/ch7/xfer.html#update-policy
+Documentation about this can be found at: http://www.zytrax.com/books/dns/ch7/xfer.html#update-policy
 
 The second is to integrate the newly created key into the zonefile:
 
@@ -83,7 +83,7 @@ The second is to integrate the newly created key into the zonefile:
 Setup at Client
 ---------------
 
-To update the zoneinfo on Server you can use the scritp above to download or you can use this simple script:
+To update the zoneinfo on the Server you can use the script above to download or you can use this simple script:
 
 .. code:: bash
 
@@ -110,7 +110,7 @@ To update the zoneinfo on Server you can use the scritp above to download or you
 Cron
 ----
 
-To let automatically update cron the service you can use this script:
+To let cron automatically update the service you can use this script:
 
 .. code:: bash
 

@@ -7,7 +7,7 @@
 
 VERBOSE=0
 
-# read the config-file
+# read the config file
 source /etc/dyneinsle/dyneinsle.conf
 
 # read the config-file for local changes

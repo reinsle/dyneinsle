@@ -7,7 +7,7 @@
 
 VERBOSE=0
 
-# read the config-file
+# read the config file
 source /etc/dyneinsle/dyneinsle.conf
 
 # read the config-file for local changes
@@ -42,26 +42,17 @@ function get_ip_of() {
   echo `ip -4 a s $IF | grep inet | sed 's/^ *//g' | cut -d '/' -f 1 | cut -d 't' -f 2 | tr -d ' '`
 }
 
-# read ipv6 interface address of interface given by parameter
-function get_ipv6_of() {
-  IF=$1
-  ip=$(ip -f inet6 -o addr show $IF | grep global | cut -d\  -f 7 | cut -d/ -f 1)
-  echo $ip
-}
-
 # Bestimmen der externen IP-Adresse
 function get_external_ip() {
   # Alternativ:
   # host -4 myip.opendns.com resolver1.opendns.com | grep address | cut -d ' ' -f 4 | tr -d ' '
   echo `curl -4 --silent http://showip.spamt.net`
-  update
 }
 
 # Update des DNS-Servers
 function update_dns() {
   NAME=$1
   IP=$2
-  TYPE=$3
   EXIST_IP=`host $1 | grep -v IPv6 | cut -d' ' -f4`
   if [ $VERBOSE -eq 1 ]; then
     printf "Upgrading %s using new IP: %s\n" "$NAME" "$IP"
@@ -70,24 +61,14 @@ function update_dns() {
   then
     /usr/bin/nsupdate -k $KEY << EOF
 server $NS_SERVER
-update delete $NAME $TYPE 
-update add $NAME 60  $TYPE $IP
+update delete $NAME A
+update add $NAME 60 A $IP
 send
 EOF
     logger -t dyneinsle "DNS-Record: $NAME: $IP changed, updating dns-record"
   else
     logger -t dyneinsle "DNS-Record: $NAME: $IP not changed, not updating"
   fi
-}
-
-function update_v6_dns() {
-  ZONE=$1
-  for IF in ${EXPORT_IPV6_INTERFACE_LIST}; do
-    IF_IP=`get_ipv6_of $IF`
-    if [ -n $IF_IP ]; then
-      update_dns $IF.$ZONE $IF_IP AAAA
-    fi
-  done
 }
 
 function usage() {
@@ -116,15 +97,13 @@ do
     esac
 done
 
-##update_dns $ZONE `get_external_ip` A
-##
-##if [ $EXPORT_IF -eq 1 ]; then
-##    for IF in `get_interfaces`; do
-##        IF_IP=`get_ip_of $IF`
-##        if [ -n "$IF_IP" ]; then
-##            update_dns $IF.$ZONE $IF_IP A
-##        fi
-##    done
-##fi
+update_dns $ZONE `get_external_ip`
 
-update_v6_dns $ZONE
+if [ $EXPORT_IF -eq 1 ]; then
+    for IF in `get_interfaces`; do
+        IF_IP=`get_ip_of $IF`
+        if [ -n "$IF_IP" ]; then
+            update_dns $IF.$ZONE $IF_IP
+        fi
+    done
+fi

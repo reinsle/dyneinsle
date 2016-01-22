@@ -9,6 +9,6 @@ Vcs-Git: git://github.com/reinsle/dyneinsle.git
 
 Package: dyneinsle
 Architecture: all
-Depends: curl, bind9utils, dnsutils
+Depends: curl, bind9utils, dnsutils, python3-netifaces
 Description: dyndns client for einsles dyndns
  dyneinsle is the client to use einsles dyndns service.

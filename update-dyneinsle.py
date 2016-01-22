@@ -1,13 +1,7 @@
 #!/usr/bin/env python3
 
-from netifaces import AF_INET, AF_INET6, AF_LINK, AF_PACKET, AF_BRIDGE
+from netifaces import AF_INET
 import netifaces as ni
-
-#ifaces = ni.interfaces()
-#print(ifaces)
-#ni.ifaddresses('eth0')[AF_LINK]
-#ni.ifaddresses('eth0')[AF_INET]
-#ni.ifaddresses('eth0')[AF_INET][0]['addr']
 
 def get_if_list(exclude_if=None):
     """
@@ -25,5 +19,19 @@ def get_if_list(exclude_if=None):
                 pass
     return ifaces
 
+def get_ip_of(if_name):
+	"""
+	Returns ip4 address of interface given by if_name.
+
+	Parameters:
+	  if_name - name of interface to return ip4 address
+	"""
+	if_ip_addr = ni.ifaddresses(if_name)[AF_INET][0]['addr']
+	return if_ip_addr
+
 if __name__ == "__main__":
-    print(get_if_list(['lo', 'en0']))
+	if_list = get_if_list(['lo'])
+    print(if_list)
+    for int in if_list:
+    	if_ip = get_ip_of(int)
+    	print(if_ip)

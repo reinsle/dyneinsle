@@ -3,6 +3,7 @@
 from netifaces import AF_INET
 import netifaces as ni
 
+
 def get_if_list(exclude_if=None):
     """
     Reads list of interfaces and returns it. If exclude_id is set, interfaces are removed from list.
@@ -19,19 +20,21 @@ def get_if_list(exclude_if=None):
                 pass
     return ifaces
 
-def get_ip_of(if_name):
-	"""
-	Returns ip4 address of interface given by if_name.
 
-	Parameters:
-	  if_name - name of interface to return ip4 address
-	"""
-	if_ip_addr = ni.ifaddresses(if_name)[AF_INET][0]['addr']
-	return if_ip_addr
+def get_ip_of(if_name):
+    """
+    Returns ip4 address of interface given by if_name.
+
+    Parameters:
+      if_name - name of interface to return ip4 address
+    """
+    if_ip_addr = ni.ifaddresses(if_name)[AF_INET][0]['addr']
+    return if_ip_addr
+
 
 if __name__ == "__main__":
-	if_list = get_if_list(['lo'])
+    if_list = get_if_list(['lo'])
     print(if_list)
     for int in if_list:
-    	if_ip = get_ip_of(int)
-    	print(if_ip)
+        if_ip = get_ip_of(int)
+        print(if_ip)

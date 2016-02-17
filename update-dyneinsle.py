@@ -29,11 +29,10 @@ def get_ip_of(if_name):
     Parameters:
         if_name - name of interface to return ip4 address
     """
-    if ni.ifaddresses(if_name)[AF_INET]:
+    if AF_INET in ni.ifaddresses(if_name).keys():
         if_ip_addr = ni.ifaddresses(if_name)[AF_INET][0]['addr']
         return if_ip_addr
-    else:
-        return None
+    return None
 
 
 def get_external_ip4():

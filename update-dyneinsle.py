@@ -22,7 +22,7 @@ def get_if_list(exclude_if=None):
     return ifaces
 
 
-def get_ip_of(if_name):
+def get_ip4_of(if_name):
     """
     Returns ip4 address of interface given by if_name.
 
@@ -51,6 +51,6 @@ if __name__ == "__main__":
     if_list = get_if_list(['lo'])
     print(if_list)
     for int in if_list:
-        if_ip = get_ip_of(int)
-        print(if_ip)
+        if_ip4 = get_ip4_of(int)
+        print(if_ip4)
     print(get_external_ip4())

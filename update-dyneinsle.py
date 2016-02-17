@@ -2,6 +2,7 @@
 
 from netifaces import AF_INET
 import netifaces as ni
+import urllib3
 
 
 def get_if_list(exclude_if=None):
@@ -31,6 +32,17 @@ def get_ip_of(if_name):
     if_ip_addr = ni.ifaddresses(if_name)[AF_INET][0]['addr']
     return if_ip_addr
 
+def get_external_ip4():
+    """
+
+    Returns:
+
+    """
+    http = urllib3.PoolManager()
+    response = http.request('GET', 'http://icanhazip.com')
+    data = response.data
+
+    return response.data
 
 if __name__ == "__main__":
     if_list = get_if_list(['lo'])
@@ -38,3 +50,4 @@ if __name__ == "__main__":
     for int in if_list:
         if_ip = get_ip_of(int)
         print(if_ip)
+    print(get_external_ip4())

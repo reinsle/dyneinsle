@@ -5,13 +5,12 @@ import netifaces as ni
 import urllib3
 
 
-
 def get_if_list(exclude_if=None):
     """
     Reads list of interfaces and returns it. If exclude_id is set, interfaces are removed from list.
 
     Parameters:
-      exclude_id - remove this interfaces from list of returned values.
+        exclude_id - remove this interfaces from list of returned values.
     """
     ifaces = ni.interfaces()
     if exclude_if is not None:
@@ -28,7 +27,7 @@ def get_ip_of(if_name):
     Returns ip4 address of interface given by if_name.
 
     Parameters:
-      if_name - name of interface to return ip4 address
+        if_name - name of interface to return ip4 address
     """
     if ni.ifaddresses(if_name)[AF_INET]:
         if_ip_addr = ni.ifaddresses(if_name)[AF_INET][0]['addr']
@@ -39,13 +38,13 @@ def get_ip_of(if_name):
 
 def get_external_ip4():
     """
+    Fetch external ipv4 address
 
     Returns:
-
+        external ipv4 adress
     """
     http = urllib3.PoolManager()
     response = http.request('GET', 'http://icanhazip.com')
-    data = response.data
     return response.data
 
 
@@ -56,4 +55,3 @@ if __name__ == "__main__":
         if_ip = get_ip_of(int)
         print(if_ip)
     print(get_external_ip4())
-
